@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registeration Form</title>
+
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body style="background-color: lightgray">
+	<div class="container">
+		<div class="row" style="text-align: center; padding: 5% ;background-color: midnightblue;">
+			<div class="col-md-12">
+				<h3 style="color: white"><b>Welcome to DLM</b></h3>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12" style="padding-left: 90%; background-color: midnightblue ;padding-bottom: 2%">
+				<a href="/logout/" class="btn btn-danger" role="button">Logout</a>
+			</div>			
+		</div>
+	</div>
+
+
+
+	<div class="container">
+		<div class="row" style="background-color: white ; padding:10% ;">
+			<div class="col-md-12" style="text-align: center; background-color: white">
+				<h3>Welcome ,{{name}}</h3>
+			</div>
+		<!-- </div> -->
+		<!-- <div class="row" style="background-color: white ;"> -->
+			<!-- <div clas="col-md-12" style="background-color: white"> -->
+				<!-- <h4><b>User details are:<b></h4> -->
+					<!-- List of uploaded documents -->
+
+					<table class="table-bordered" align="center">
+						<thead>
+							<th style="text-align: center;">Date</th>
+							<th style="text-align: center;">No. of file uploaded</th>
+						</thead>
+						<tbody>
+							{%for file in data%}
+							<tr>
+							<td style="text-align: center;">
+								{{file.docdate_created}}
+							</td>
+							<td style="text-align: center;">
+								<a href="/filedetails/{{file.docdate_created|urlencode}}/">{{file.created_count}}</a>
+							</td>
+						</tr>
+							{%endfor%}
+						</tbody>
+					</table>
+
+
+					<h3>Uploaded Documents are:</h3>
+					{% if documents %}
+					<ul>
+						{% for document in documents %}
+						<li><a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a></li>
+						{% endfor %}
+					</ul>
+					{% else %}
+					<p>No documents.</p>
+					{% endif %}
+
+					<!-- Upload form. Note enctype attribute! -->
+					<form action="/dashboard/" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						Upload a file here :<input type="file" name="myfile"/>
+						<input type="submit" value="Upload" />
+					</form>
+					{% if messages %}
+					<ul class="messages">
+						{% for message in messages %}
+						<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+						{% endfor %}
+					</ul>
+					{% endif %}
+				</div>
+			<!-- </div> -->
+		</div>
+	</body>
+	</html>

@@ -1,0 +1,25 @@
+A user should be able to signup in the applicaiton giving his name, email and password
+A user should be able to login to the application
+Upon login he should be greeted with 'Welcome Kannan' ( or whatever his name is )
+
+The dashboard should show a table with the following statistics
+ - day
+ - number of files uploaded
+
+Numbe of files uploaded, should be a link and clicking it should display the file details (name, size, date of upload, extension etc.. )
+
+It should also have a view button to view the contents of the file
+
+Clicking the view page should show the contents of the file.
+
+
+The user should be able to upload a csv file to the website, read its contents and store its filename, size of file, extension of the file, date of upload and content into a database and display all of them to the user
+
+The user shoudl be able to logout of the application
+
+The user should have a search option where he can search for all the uplaoded files between any two days
+
+extra
+-----
+need to implement validations
+need to implement proper error messages, good navigation.
